@@ -9,7 +9,6 @@ This file has the functions that helps
 import logging
 import os
 import re
-import shutil
 import socket
 
 from avocado.utils import process
@@ -170,6 +169,7 @@ def gluster_brick_delete(brick_path, session=None):
         cmd1_str = "session.cmd_status('[ ! -d %s ]' % brick_path)"
         cmd2_str = "session.cmd('rm -rf %s' % brick_path)"
     else:
+        import shutil
         cmd1_str = "os.path.isdir(brick_path)"
         cmd2_str = "shutil.rmtree(brick_path)"
 

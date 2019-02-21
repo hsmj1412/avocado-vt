@@ -603,8 +603,9 @@ def setup_or_cleanup_gluster(is_setup, vol_name, brick_path="", pool_name="",
     if ip_addr != "":
         remote_user = kwargs.get("gluster_server_user")
         remote_pwd = kwargs.get("gluster_server_pwd")
-        session = remote.remote_login("ssh", ip_addr, "22",
-                                      remote_user, remote_pwd, "#")
+        remote_identity_file = kwargs.get("gluster_identity_file", None)
+        session = remote.remote_login("ssh", ip_addr, "22", remote_user, remote_pwd,
+                                      "#", identity_file=remote_identity_file)
     if is_setup:
         if ip_addr == "":
             ip_addr = get_host_ipv4_addr()
